@@ -14,16 +14,15 @@
 # define PUSH_SWAP_H
 # include "libft/libft.h"
 
-char				**ft_split(char const *s, char c);
 
-typedef struct st_node
+int	ft_atoi_push(const char *str);
+
+typedef struct s_stack
 {
-    int data;
-    struct st_node *next;
-    struct st_node *prev;
-    int index;
-
-}   p_node;
+	int	content;
+	int	index;
+	struct s_list	*next;
+}					t_stack;
 
 // typedef struct st_stack
 // {
