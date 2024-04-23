@@ -16,6 +16,9 @@
 
 
 int	ft_atoi_push(const char *str);
+int    ft_check_fullspace(int argc,char **argv);
+int ft_check_full_number(int j, char **splstre);
+int *bubble_sort(int *tab, int len);
 
 typedef struct s_stack
 {
