@@ -14,18 +14,29 @@
 # define PUSH_SWAP_H
 # include "libft/libft.h"
 
-
-int	ft_atoi_push(const char *str);
-int    ft_check_fullspace(int argc,char **argv);
-int ft_check_full_number(int j, char **splstre);
-int *bubble_sort(int *tab, int len);
-
 typedef struct s_stack
 {
 	int	content;
 	int	index;
-	struct s_list	*next;
+	struct s_stack	*next;
 }					t_stack;
+
+void    get_index_list(t_stack **a_head_ptr, int *tab, int len);
+int	ft_atoi_push(const char *str);
+int    ft_check_fullspace(int argc,char **argv);
+int ft_check_full_number(int j, char **splstre);
+int *bubble_sort(int *tab, int len);
+void	lstadd_back(t_stack **lst, t_stack *new);
+int	ft_lstsize_p(t_stack *lst);
+t_stack	*lstlast(t_stack *lst);
+t_stack	*lstnew(int content);
+void    pa_push_a(t_stack **a_list, t_stack **b_list);
+void    pb_push_b(t_stack **a_list, t_stack **b_list);
+void    ra_rotate_a(t_stack **a_list);
+void    rb_rotate_b(t_stack **b_list);
+void    rra_reve_rotat_a(t_stack **a_list);
+void    rrb_reve_rotat_b(t_stack **b_list);
+void    push_to_b(t_stack **a_stack, t_stack **b_stack, int taill, int *tab);
 
 // typedef struct st_stack
 // {

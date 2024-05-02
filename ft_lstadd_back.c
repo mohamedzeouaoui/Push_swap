@@ -12,7 +12,7 @@
 
 #include "push_swap.h"
 
-void	ft_lstadd_back(t_stack **lst, t_stack *new)
+void	lstadd_back(t_stack **lst, t_stack *new)
 {
 	t_stack	*tmp;
 
@@ -20,7 +20,7 @@ void	ft_lstadd_back(t_stack **lst, t_stack *new)
 		return ;
 	if (*lst != NULL)
 	{
-		tmp = ft_lstlast(*lst);
+		tmp = lstlast(*lst);
 		tmp->next = new;
 	}
 	else

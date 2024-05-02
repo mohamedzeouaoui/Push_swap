@@ -99,7 +99,6 @@ int *bubble_sort(int *tab, int len)
 
     swap = 1;
     i = 0;
-
     while (swap)
     {
         swap = 0;
@@ -116,4 +115,26 @@ int *bubble_sort(int *tab, int len)
         i++;
     }
     return (tab);
+}
+
+void    get_index_list(t_stack **a_head_ptr, int *tab, int len)
+{
+    int i;
+    t_stack *temp;
+
+    temp = *a_head_ptr;
+    while (temp != NULL)
+    {
+        i = 0;
+        while (i < len)
+        {
+            if (temp->content == tab[i])
+            {
+                temp->index = i ;
+            }
+            i++;
+        }
+        temp = temp->next;
+    }
+    free(tab);
 }

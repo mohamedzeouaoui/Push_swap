@@ -12,7 +12,15 @@
 
 #include  "../push_swap.h"
 
-void    pa_push_a()
+void    pa_push_a(t_stack **a_list, t_stack **b_list)
 {
-    
+    t_stack *tmp;
+
+    if (*b_list == NULL)
+        return ;
+    tmp = *b_list;
+    *b_list = (*b_list)->next;
+    tmp->next = *a_list;
+    *a_list = tmp;
+    return ;
 }

@@ -10,4 +10,17 @@
 /*                                                                            */
 /* ************************************************************************** */
 
+#include  "../push_swap.h"
 
+void    pb_push_b(t_stack **a_list, t_stack **b_list)
+{
+    t_stack *tmp;
+
+    if (*a_list == NULL)
+        return ;
+    tmp = *a_list;
+    *a_list = (*a_list)->next;
+    tmp->next = *b_list;
+    *b_list = tmp; 
+    return ;
+}

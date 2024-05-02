@@ -12,7 +12,7 @@
 
 #include "push_swap.h"
 
-t_stack	*ft_lstlast(t_stack *lst)
+t_stack	*lstlast(t_stack *lst)
 {
 	while (lst != NULL)
 	{
