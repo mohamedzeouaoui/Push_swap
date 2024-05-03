@@ -20,6 +20,18 @@ typedef struct s_stack
 	int	index;
 	struct s_stack	*next;
 }					t_stack;
+typedef struct global
+{
+	int start;
+	int end;
+	int offset;
+	int size;
+	int size_a;
+	int size_b;
+	t_stack *stack_a;
+	t_stack *stack_b;
+	int *tab;
+} t_global;
 
 void    get_index_list(t_stack **a_head_ptr, int *tab, int len);
 int	ft_atoi_push(const char *str);
@@ -36,7 +48,10 @@ void    ra_rotate_a(t_stack **a_list);
 void    rb_rotate_b(t_stack **b_list);
 void    rra_reve_rotat_a(t_stack **a_list);
 void    rrb_reve_rotat_b(t_stack **b_list);
-void    push_to_b(t_stack **a_stack, t_stack **b_stack, int taill, int *tab);
+void    push_to_b(t_global *var, int taill, int *tab);
+void    ft_dbl_free(char **dbl_ptr);
+void    exit_program(t_stack *a_head, t_stack *b_head, int exit_flag);
+int cheack_duplicate(int *tab,int len);
 
 // typedef struct st_stack
 // {

@@ -12,6 +12,62 @@
 
 #include "push_swap.h"
 
+
+int cheack_duplicate(int *tab,int len)
+{
+    int i;
+    int j;
+
+    i = 0;
+    while (i < len)
+    {
+        j = 1;
+        while (j+i < len)
+        {
+            if (tab[i] == tab[j+i])
+                return (1);
+            j++;
+        }
+        i++;
+    }
+    return (0);
+}
+
+void    exit_program(t_stack *a_head, t_stack *b_head, int exit_flag)
+{
+    t_stack *temp;
+
+    if (a_head != NULL)
+    {
+        while (a_head)
+        {
+            temp = a_head;
+            a_head = a_head->next;
+            free(temp);
+        }
+    }
+    if (b_head != NULL)
+    {
+        while (b_head)
+        {
+            temp = b_head;
+            b_head = b_head->next;
+            free(temp);
+        }
+    }
+    exit(exit_flag);
+}
+
+void    ft_dbl_free(char **dbl_ptr)
+{
+    int i;
+
+    i = 0;
+    while (dbl_ptr[i])
+        free(dbl_ptr[i++]);
+    free(dbl_ptr);
+}
+
 int    ft_check_space(char *arv)
 {
     int i;
@@ -138,3 +194,32 @@ void    get_index_list(t_stack **a_head_ptr, int *tab, int len)
     }
     free(tab);
 }
+
+// void    parsing (int argc, char **argv , char    **spltstr)
+// {
+//     char    *joinstr;
+//     char    *temporary;
+
+//     joinstr = malloc(1);
+//     joinstr[0] = '\0';
+
+//     if (ft_check_fullspace(argc,argv) == 1)
+//     {
+//         ft_putstr_fd("Error\n", 2);
+//         return(1);
+//     }
+//     while (i < argc)
+//     {
+//         temporary = joinstr;
+//         joinstr = ft_strjoin(joinstr, argv[i]);
+//         free(temporary);
+//         temporary = joinstr;
+//         joinstr = ft_strjoin(joinstr, " ");
+//         free(temporary);
+//         i++;
+//     }
+    
+//     spltstr = ft_split(joinstr, ' ');
+//     free(joinstr);
+
+// }

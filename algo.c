@@ -11,7 +11,7 @@
 /* ************************************************************************** */
 
 #include "push_swap.h"
-
+#include <stdio.h>
 int check_n(int j)
 {
     if (j <= 10)
@@ -25,33 +25,38 @@ int check_n(int j)
 
 
 
-void    push_algo(t_stack **a_stack, t_stack **b_stack, int start, int end, int *tab)
+void    push_algo(t_stack **a_stack, t_stack **b_stack, int start, int end, int *tab, int taill)
 {
     t_stack *a_head;
     int i;
+    float m;
 
     a_head = *a_stack;
-    while (a_head)
-    {
-        i = start;
-        while (i < end)
+    // while (a_head)
+    // {
+        i = 0;
+        printf("%d",taill);
+        while (i < taill)
         {
-            if((a_head->content == tab[i]) && ((float)(i - start) >= (float)((end - start) / 2)))
-                pb_push_b(a_stack, b_stack);
-            else if (a_head->content == tab[i])
+            if ((tab[start] <= a_head->content) && (a_head->content < tab[end]))
             {
                 pb_push_b(a_stack, b_stack);
-                rb_rotate_b(b_stack);
+                m = (float)(((end - start) / 2) + start);
+                // printf("%f\n", m);
+                // printf("%d\n", (*b_stack)->index);
+
+                if ((float)((*b_stack)->index) < m)
+                    rb_rotate_b(b_stack);
             }
             else
                 ra_rotate_a(a_stack);
             i++;
         }
         a_head = a_head->next;
-    }
+    // }
 }
 
-void    push_to_b(t_stack **a_stack, t_stack **b_stack, int taill, int *tab)
+void    push_to_b(t_global *var, int taill, int *tab)
 {
     int n;
     int midel;
@@ -64,13 +69,19 @@ void    push_to_b(t_stack **a_stack, t_stack **b_stack, int taill, int *tab)
     offset = taill / n;
     start = midel - offset;
     end = midel + offset;
+    printf("..n..%d....\n",n);
+    printf("..offset..%d....\n",offset);
+    printf("..start..%d....\n",start);
+    printf("var>> :%d , stck_A>> %d\n",var->stack_a->content,var->tab[3]);
+    // printf("..end..%d....\n",end);
 
-    while ((end <= taill) && (0 <= start))
-    {
-        push_algo(a_stack, b_stack, start, end, tab);
+
+    // while ((end <= taill) && (0 <= start))
+    // {
+        push_algo(&var->stack_a, &var->stack_b, start, end, tab, taill);
         end = end + offset;
         start = start - offset;
-    }
-    if (end < (taill-1) || 0 < start)
-        push_algo(a_stack, b_stack, 0, (taill-1), tab);
+    // }
+    // if (end < (taill-1) || 0 < start)
+    //     push_algo(a_stack, b_stack, 0, (taill-1), tab);
 }

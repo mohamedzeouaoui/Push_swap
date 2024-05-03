@@ -14,65 +14,12 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-int cheack_duplicate(int *tab,int len)
-{
-    int i;
-    int j;
-
-    i = 0;
-    while (i < len)
-    {
-        j = 1;
-        while (j+i < len)
-        {
-            if (tab[i] == tab[j+i])
-                return (1);
-            j++;
-        }
-        i++;
-    }
-    return (0);
-}
-
-void    exit_program(t_stack *a_head, t_stack *b_head, int exit_flag)
-{
-    t_stack *temp;
-
-    if (a_head != NULL)
-    {
-        while (a_head)
-        {
-            temp = a_head;
-            a_head = a_head->next;
-            free(temp);
-        }
-    }
-    if (b_head != NULL)
-    {
-        while (b_head)
-        {
-            temp = b_head;
-            b_head = b_head->next;
-            free(temp);
-        }
-    }
-    exit(exit_flag);
-}
-
-void    ft_dbl_free(char **dbl_ptr)
-{
-    int i;
-
-    i = 0;
-    while (dbl_ptr[i])
-        free(dbl_ptr[i++]);
-    free(dbl_ptr);
-}
 
 int main(int argc, char **argv)
 {
     int i;
     int j;
+    int m;
     int *tab;
     int *tab_nsort;
     char    *joinstr;
@@ -81,7 +28,8 @@ int main(int argc, char **argv)
     t_stack *a_head_ptr;
     t_stack *b_head_ptr;
     t_stack *tmp;
-    
+    t_global var;
+
     a_head_ptr = NULL;
     b_head_ptr = NULL;
     i = 1;
@@ -113,6 +61,7 @@ int main(int argc, char **argv)
     while (spltstr[j])
         j++;
 
+    var.size = j;
     if(ft_check_full_number(j, spltstr) == 0)
     {
         ft_putstr_fd("Error\n", 2);
@@ -147,6 +96,27 @@ int main(int argc, char **argv)
         i++;
     }
     i = 0;
+    tmp = a_head_ptr;
+    while (i < j)
+    {
+        m = 0;
+        while (m < j)
+        {
+            if(tmp->content == tab[m])
+                tmp->index = m;
+            m++;
+        }
+        tmp = tmp->next;
+        i++;
+    }
+    // tmp = a_head_ptr;
+    
+    // while (tmp)
+    // {
+    //     printf("........%d\n", tmp->index);
+    //     tmp = tmp->next;
+    // }
+
     // lstadd_back(&b_head_ptr,lstnew(888));
     // pa_push_a(&a_head_ptr, &b_head_ptr);
     // pb_push_b(&a_head_ptr, &b_head_ptr);
@@ -155,7 +125,10 @@ int main(int argc, char **argv)
     // rb_rotate_b(&a_head_ptr);
     // rra_reve_rotat_a(&a_head_ptr);
     // rrb_reve_rotat_b(&a_head_ptr);
-    push_to_b(&a_head_ptr, &b_head_ptr,(j+1) ,tab);
+    var.stack_a = a_head_ptr;
+    var.stack_b = b_head_ptr;
+    var.tab = tab;
+    push_to_b(&var,j,tab);
 
     tmp = b_head_ptr;
 
@@ -173,7 +146,7 @@ int main(int argc, char **argv)
         tmp = tmp->next;
     }
     
-    get_index_list(&a_head_ptr, tab, j);
+    // get_index_list(&a_head_ptr, tab, j);
     free(tab_nsort);
     ft_dbl_free(spltstr);
     exit_program(a_head_ptr, b_head_ptr, 0);
