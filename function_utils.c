@@ -195,31 +195,27 @@ void    get_index_list(t_stack **a_head_ptr, int *tab, int len)
     free(tab);
 }
 
-// void    parsing (int argc, char **argv , char    **spltstr)
-// {
-//     char    *joinstr;
-//     char    *temporary;
+void parsing (int argc, char **argv , char ***spltstr)
+{
+    int i;
+    char    *joinstr;
+    char    *temporary;
 
-//     joinstr = malloc(1);
-//     joinstr[0] = '\0';
+    i = 1;
+    joinstr = malloc(1);
+    joinstr[0] = '\0';
 
-//     if (ft_check_fullspace(argc,argv) == 1)
-//     {
-//         ft_putstr_fd("Error\n", 2);
-//         return(1);
-//     }
-//     while (i < argc)
-//     {
-//         temporary = joinstr;
-//         joinstr = ft_strjoin(joinstr, argv[i]);
-//         free(temporary);
-//         temporary = joinstr;
-//         joinstr = ft_strjoin(joinstr, " ");
-//         free(temporary);
-//         i++;
-//     }
+    while (i < argc)
+    {
+        temporary = joinstr;
+        joinstr = ft_strjoin(joinstr, argv[i]);
+        free(temporary);
+        temporary = joinstr;
+        joinstr = ft_strjoin(joinstr, " ");
+        free(temporary);
+        i++;
+    }
     
-//     spltstr = ft_split(joinstr, ' ');
-//     free(joinstr);
-
-// }
+    (*spltstr) = ft_split(joinstr, ' ');
+    free(joinstr);
+}

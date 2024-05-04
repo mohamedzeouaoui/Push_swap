@@ -22,20 +22,22 @@ int main(int argc, char **argv)
     int m;
     int *tab;
     int *tab_nsort;
-    char    *joinstr;
+    // char    *joinstr;
     char    **spltstr;
-    char    *temporary;
+    // char    *temporary;
     t_stack *a_head_ptr;
     t_stack *b_head_ptr;
     t_stack *tmp;
     t_global var;
 
+    spltstr = NULL;
     a_head_ptr = NULL;
     b_head_ptr = NULL;
     i = 1;
     j = 0;
-    joinstr = malloc(1);
-    joinstr[0] = '\0';
+
+    // joinstr = malloc(1);
+    // joinstr[0] = '\0';
     // if (argc < 2)
     //     return (0);
 
@@ -44,23 +46,24 @@ int main(int argc, char **argv)
         ft_putstr_fd("Error\n", 2);
         return(1);
     }
-    while (i < argc)
-    {
-        temporary = joinstr;
-        joinstr = ft_strjoin(joinstr, argv[i]);
-        free(temporary);
-        temporary = joinstr;
-        joinstr = ft_strjoin(joinstr, " ");
-        free(temporary);
-        i++;
-    }
+    // while (i < argc)
+    // {
+    //     temporary = joinstr;
+    //     joinstr = ft_strjoin(joinstr, argv[i]);
+    //     free(temporary);
+    //     temporary = joinstr;
+    //     joinstr = ft_strjoin(joinstr, " ");
+    //     free(temporary);
+    //     i++;
+    // }
     
-    spltstr = ft_split(joinstr, ' ');
-    free(joinstr);
+    // spltstr = ft_split(joinstr, ' ');
+    // free(joinstr);
+    parsing(argc, argv, &spltstr);
 
     while (spltstr[j])
         j++;
-
+    // printf("%d \n", j);
     var.size = j;
     if(ft_check_full_number(j, spltstr) == 0)
     {
