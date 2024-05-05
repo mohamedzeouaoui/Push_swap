@@ -203,7 +203,14 @@ void    get_index_list(t_stack **a_head_ptr, int *tab, int len)
     }
     free(tab);
 }
-
+void    count_size(t_global *var, char **spltstr)
+{
+    var->size = 0;
+    while (spltstr[var->size])
+        var->size++;
+    if (var->size == 1)
+        exit(1); //you should free here
+}
 void    parsing (int argc, char **argv , char ***spltstr, t_global *var)
 {
     int i;
@@ -213,21 +220,19 @@ void    parsing (int argc, char **argv , char ***spltstr, t_global *var)
     i = 1;
     joinstr = malloc(1);
     joinstr[0] = '\0';
-    var->size = 0;
     while (i < argc)
     {
         temporary = joinstr;
         joinstr = ft_strjoin(joinstr, argv[i]);
-        var->size++;
         free(temporary);
         temporary = joinstr;
         joinstr = ft_strjoin(joinstr, " ");
         free(temporary);
         i++;
     }
-    
     *spltstr = ft_split(joinstr, ' ');
     free(joinstr);
+    count_size(var, *spltstr);
     return ;
 }
 
@@ -264,3 +269,27 @@ void    fill_index(t_global *var)
         i++;
     }
 }
+void fill_stack(t_global *var) 
+{
+    int i;
+
+    i = -1;
+    while (++i < var->size)
+        lstadd_back(&(var->stack_a),lstnew(var->tab[i]));
+    var->tab = bubble_sort(var->tab,var->size);
+    fill_index(var);
+}
+
+int parsing_global(int argc, char **argv,t_global *var,char ***spltstr)
+{
+    if (ft_check_fullspace(argc,argv))
+        return(1);
+    parsing(argc, argv, spltstr,var);
+    if(ft_check_full_number(var->size, *spltstr))
+        return(1);
+    atoi_number(var, *spltstr);
+    if(cheack_duplicate(var->tab, var->size))
+        return(1);
+    return(0);
+}
+

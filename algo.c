@@ -25,53 +25,32 @@ int check_n(int j)
 
 
 
-void    push_algo(t_stack **a_stack, t_stack *b_stack, int start, int end, int *tab, int taill)
+void    push_algo(t_global *var, int start, int end)
 {
     t_stack *a_head;
-    // t_stack *tmp;
     int i;
     float m;
 
-    taill= taill + 0;
-    a_head = a_stack; a_head = a_head->next;
-    while (a_head)
+    a_head = var->stack_a;
+    i =0;
+    while (i < var->size)
     {
-        i = 0;
-        // printf("%d",a_stack->index);
-        // while (i < taill)
-    //     {
-                // printf("looooool");
-            // tmp = a_stack;
-            // while (tmp)
-            // {
-            //     printf("........%d\n", tmp->content);
-            //     tmp = tmp->next;
-            // }
-            // printf("..start..%d....\n",tab[start]);
-            // printf("a->head->content..%d....\n",a_head->content);
-
-
-            if ((tab[start] <= a_head->content))
-            {
-                printf("looooool");
-                pb_push_b(&a_stack, &b_stack);
-                m = (float)(((end - start) / 2) + start);
-                // printf("%f\n", m);
-                // printf("%d\n", (*b_stack)->index);
-
-                if ((float)((b_stack)->index) < m)
-                    rb_rotate_b(&b_stack);
-            }
-            else
-                ra_rotate_a(&a_stack);
-            // i++;
-        
-        // }
+        if ((var->tab[start] <= var->stack_a->content) && (var->stack_a->content < var->tab[end]))
+        {
+            pb_push_b(&var->stack_a, &var->stack_b);
+            m = (float)(((end - start) / 2) + start);
+            if ((float)((var->stack_b)->index) < m)
+                rb_rotate_b(&var->stack_b);
+        }
+        else
+            ra_rotate_a(&var->stack_a);
+        a_head = var->stack_a;
         a_head = a_head->next;
+        i++;
     }
 }
 
-void    push_to_b(t_global *var, int taill, int *tab)
+void    push_to_b(t_global *var)
 {
     int n;
     int midel;
@@ -79,25 +58,26 @@ void    push_to_b(t_global *var, int taill, int *tab)
     int start;
     int end;
 
-    n = check_n(taill);
-    midel = taill / 2;
-    offset = taill / n;
+    n = check_n(var->size);
+    midel = var->size / 2;
+    offset = var->size / n;
     start = midel - offset;
     end = midel + offset;
-    printf("..n..%d....\n",n);
-    printf("..offset..%d....\n",offset);
-    printf("..start..%d....\n",start);
-    printf("var>> :%d , stck_A>> %d\n",var->stack_a->content,var->tab[3]);
-    printf("..end..%d....\n",taill);
-
-
-    // while ((end <= taill) && (0 <= start))
-    // {
-
-        push_algo((var->stack_a), (var->stack_b), start, end, tab, taill);
+    while ((end <= var->size) && (0 <= start))
+    {
+        push_algo(var, start, end);
         end = end + offset;
         start = start - offset;
-    // }
-    // if (end < (taill-1) || 0 < start)
-    //     push_algo(a_stack, b_stack, 0, (taill-1), tab);
+        
+    }
+    if((start < 0) || (end > var->size))
+    {
+        start = 0;
+        end = var->size - 1;
+        push_algo(var, start, end);
+    }
 }
+// void    pushb_to_a(t_global *var)
+// {
+
+// }

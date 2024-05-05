@@ -48,13 +48,15 @@ void    ra_rotate_a(t_stack **a_list);
 void    rb_rotate_b(t_stack **b_list);
 void    rra_reve_rotat_a(t_stack **a_list);
 void    rrb_reve_rotat_b(t_stack **b_list);
-void    push_to_b(t_global *var, int taill, int *tab);
+void    push_to_b(t_global *var);
 void    ft_dbl_free(char **dbl_ptr);
 void    exit_program(t_stack *a_head, t_stack *b_head, int exit_flag);
 int cheack_duplicate(int *tab,int len);
 void parsing (int argc, char **argv , char    ***spltstr, t_global *var);
 void    atoi_number(t_global *var,char **spltstr);
 void    fill_index(t_global *var);
+int parsing_global(int argc, char **argv,t_global *var,char ***spltstr);
+void fill_stack(t_global *var);
 
 
 
