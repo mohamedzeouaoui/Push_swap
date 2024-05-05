@@ -25,35 +25,50 @@ int check_n(int j)
 
 
 
-void    push_algo(t_stack **a_stack, t_stack **b_stack, int start, int end, int *tab, int taill)
+void    push_algo(t_stack **a_stack, t_stack *b_stack, int start, int end, int *tab, int taill)
 {
     t_stack *a_head;
+    // t_stack *tmp;
     int i;
     float m;
 
-    a_head = *a_stack;
-    // while (a_head)
-    // {
+    taill= taill + 0;
+    a_head = a_stack; a_head = a_head->next;
+    while (a_head)
+    {
         i = 0;
-        printf("%d",taill);
-        while (i < taill)
-        {
-            if ((tab[start] <= a_head->content) && (a_head->content < tab[end]))
+        // printf("%d",a_stack->index);
+        // while (i < taill)
+    //     {
+                // printf("looooool");
+            // tmp = a_stack;
+            // while (tmp)
+            // {
+            //     printf("........%d\n", tmp->content);
+            //     tmp = tmp->next;
+            // }
+            // printf("..start..%d....\n",tab[start]);
+            // printf("a->head->content..%d....\n",a_head->content);
+
+
+            if ((tab[start] <= a_head->content))
             {
-                pb_push_b(a_stack, b_stack);
+                printf("looooool");
+                pb_push_b(&a_stack, &b_stack);
                 m = (float)(((end - start) / 2) + start);
                 // printf("%f\n", m);
                 // printf("%d\n", (*b_stack)->index);
 
-                if ((float)((*b_stack)->index) < m)
-                    rb_rotate_b(b_stack);
+                if ((float)((b_stack)->index) < m)
+                    rb_rotate_b(&b_stack);
             }
             else
-                ra_rotate_a(a_stack);
-            i++;
-        }
+                ra_rotate_a(&a_stack);
+            // i++;
+        
+        // }
         a_head = a_head->next;
-    // }
+    }
 }
 
 void    push_to_b(t_global *var, int taill, int *tab)
@@ -73,12 +88,13 @@ void    push_to_b(t_global *var, int taill, int *tab)
     printf("..offset..%d....\n",offset);
     printf("..start..%d....\n",start);
     printf("var>> :%d , stck_A>> %d\n",var->stack_a->content,var->tab[3]);
-    // printf("..end..%d....\n",end);
+    printf("..end..%d....\n",taill);
 
 
     // while ((end <= taill) && (0 <= start))
     // {
-        push_algo(&var->stack_a, &var->stack_b, start, end, tab, taill);
+
+        push_algo((var->stack_a), (var->stack_b), start, end, tab, taill);
         end = end + offset;
         start = start - offset;
     // }

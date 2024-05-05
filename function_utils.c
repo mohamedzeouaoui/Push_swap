@@ -25,7 +25,10 @@ int cheack_duplicate(int *tab,int len)
         while (j+i < len)
         {
             if (tab[i] == tab[j+i])
+            {
+                ft_putstr_fd("Error\n", 2);
                 return (1);
+            }
             j++;
         }
         i++;
@@ -89,7 +92,10 @@ int    ft_check_fullspace(int argc,char **argv)
     while (i < argc)
     {
         if (ft_check_space(argv[i++]) == 0)
+        {
+            ft_putstr_fd("Error\n", 2);
             return(1);
+        }
     }
     return(0);
 }
@@ -132,10 +138,13 @@ int ft_check_full_number(int j, char **splstre)
     {
 
         if (ft_check_number(splstre[i]) == 0)
-            return (0);
+        {
+            ft_putstr_fd("Error\n", 2);
+            return (1);
+        }
         i++;
     }
-    return(1);
+    return(0);
 }
 
 void    ft_swaping(int *a, int *b)
@@ -195,7 +204,7 @@ void    get_index_list(t_stack **a_head_ptr, int *tab, int len)
     free(tab);
 }
 
-void parsing (int argc, char **argv , char ***spltstr)
+void    parsing (int argc, char **argv , char ***spltstr, t_global *var)
 {
     int i;
     char    *joinstr;
@@ -204,11 +213,12 @@ void parsing (int argc, char **argv , char ***spltstr)
     i = 1;
     joinstr = malloc(1);
     joinstr[0] = '\0';
-
+    var->size = 0;
     while (i < argc)
     {
         temporary = joinstr;
         joinstr = ft_strjoin(joinstr, argv[i]);
+        var->size++;
         free(temporary);
         temporary = joinstr;
         joinstr = ft_strjoin(joinstr, " ");
@@ -216,6 +226,41 @@ void parsing (int argc, char **argv , char ***spltstr)
         i++;
     }
     
-    (*spltstr) = ft_split(joinstr, ' ');
+    *spltstr = ft_split(joinstr, ' ');
     free(joinstr);
+    return ;
+}
+
+void    atoi_number(t_global *var,char **spltstr)
+{
+    int j;
+    var->tab = malloc(sizeof(int) * var->size);
+    j = 0;
+    while (spltstr[j])
+    {
+        var->tab[j] = ft_atoi_push(spltstr[j]);
+        // printf("1>");
+        j++;
+    }
+}
+void    fill_index(t_global *var)
+{
+    int i;
+    int m;
+    t_stack *tmp;
+
+    i = 0;
+    tmp = var->stack_a;
+     while (i < var->size)
+    {
+        m = 0;
+        while (m < var->size)
+        {
+            if(tmp->content == var->tab[m])
+                tmp->index = m;
+            m++;
+        }
+        tmp = tmp->next;
+        i++;
+    }
 }

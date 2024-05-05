@@ -19,7 +19,6 @@ int	ft_atoi_push(const char *str)
 	int	m;
 	long	nmb;
 
-
 	m = 1;
 	nmb = 0;
 	while ((*str > 8 && *str < 14) || *str == 32)

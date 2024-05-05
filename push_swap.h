@@ -52,14 +52,12 @@ void    push_to_b(t_global *var, int taill, int *tab);
 void    ft_dbl_free(char **dbl_ptr);
 void    exit_program(t_stack *a_head, t_stack *b_head, int exit_flag);
 int cheack_duplicate(int *tab,int len);
-void parsing (int argc, char **argv , char    ***spltstr);
+void parsing (int argc, char **argv , char    ***spltstr, t_global *var);
+void    atoi_number(t_global *var,char **spltstr);
+void    fill_index(t_global *var);
 
-// typedef struct st_stack
-// {
-//     p_node *haut;
-//     p_node *bas;
 
-// }   p_stack;
+
 
 
 #endif
