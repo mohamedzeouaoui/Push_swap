@@ -17,6 +17,8 @@ void    rra_reve_rotat_a(t_stack **a_list)
     t_stack *tmp;
     t_stack *elm;
 
+    if (*a_list == NULL || ft_lstsize_p(*a_list) == 1)
+        return ;
     elm = *a_list;
     while (elm->next->next != NULL)
     {
