@@ -23,6 +23,8 @@ void    sa_swap_a(t_stack **a_list)
     *a_list = (*a_list)->next;
     elm = (*a_list)->next;
     tmp->next = elm;
-    (*a_list)->next = tmp;;
+    (*a_list)->next = tmp;
+    ft_putstr_fd("ra\n", 1);
+
     return ;
 }

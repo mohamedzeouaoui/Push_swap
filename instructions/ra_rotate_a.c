@@ -28,5 +28,7 @@ void    ra_rotate_a(t_stack **a_list)
     }
     elm->next = tmp;
     tmp->next = NULL;
+    ft_putstr_fd("ra\n", 1);
+
     return ;
 }

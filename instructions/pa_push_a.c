@@ -22,5 +22,6 @@ void    pa_push_a(t_stack **a_list, t_stack **b_list)
     *b_list = (*b_list)->next;
     tmp->next = *a_list;
     *a_list = tmp;
+    ft_putstr_fd("pa\n", 1);
     return ;
 }

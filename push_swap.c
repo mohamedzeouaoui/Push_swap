@@ -32,6 +32,9 @@ int main(int argc, char **argv)
     fill_stack(&var);
     push_to_b(&var);
 
+    pushb_to_a(&var);
+
+
     tmp = var.stack_b;
     while (tmp)
     {
@@ -51,6 +54,7 @@ int main(int argc, char **argv)
     return 0;
 
 }
+
 
 
 

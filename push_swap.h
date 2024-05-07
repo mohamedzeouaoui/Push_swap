@@ -26,6 +26,7 @@ typedef struct global
 	int end;
 	int offset;
 	int size;
+	int	down;
 	int size_a;
 	int size_b;
 	t_stack *stack_a;
@@ -63,7 +64,7 @@ void    fill_index(t_global *var);
 int parsing_global(int argc, char **argv,t_global *var,char ***spltstr);
 void fill_stack(t_global *var);
 
-
+void    pushb_to_a(t_global *var);
 
 
 

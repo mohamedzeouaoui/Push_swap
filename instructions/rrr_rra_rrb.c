@@ -16,4 +16,6 @@ void    rrr_rra_rrb(t_stack **a_list,t_stack **b_list)
 {
     rra_reve_rotat_a(a_list);
     rrb_reve_rotat_b(b_list);
+    ft_putstr_fd("ra\n", 1);
+
 }

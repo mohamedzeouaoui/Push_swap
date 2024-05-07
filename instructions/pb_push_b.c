@@ -21,6 +21,8 @@ void    pb_push_b(t_stack **a_list, t_stack **b_list)
     tmp = *a_list;
     *a_list = (*a_list)->next;
     tmp->next = *b_list;
-    *b_list = tmp; 
+    *b_list = tmp;
+    ft_putstr_fd("pb\n", 1);
+
     return ;
 }

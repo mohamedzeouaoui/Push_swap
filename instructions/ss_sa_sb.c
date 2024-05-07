@@ -16,5 +16,7 @@ void    ss_sa_b(t_stack **a_list, t_stack **b_list)
 {
     sa_swap_a(a_list);
     sb_swap_b(b_list);
+    ft_putstr_fd("ra\n", 1);
+    
 }
 
