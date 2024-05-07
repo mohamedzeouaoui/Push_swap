@@ -24,7 +24,7 @@ int check_n(int j)
     return(0);
 }
  int chrch_in(int value, int *tab, int start, int end)
- { 
+{ 
     while(start <= end)
     {
         if (tab[start] == value)
@@ -32,9 +32,7 @@ int check_n(int j)
         start++;
     }
     return (0);
- }
- 
-
+}
 
 void    push_algo(t_global *var, int start, int end, int offset,int middle)
 {
@@ -105,7 +103,6 @@ int	chrch_index_value(t_stack *stack_b, int max)
     t_stack *b_head;
 
 	i = 0;
-    // int size = 0;
     b_head  = stack_b;
 	while (b_head)
 	{
@@ -115,6 +112,27 @@ int	chrch_index_value(t_stack *stack_b, int max)
         b_head = b_head->next;
 	}
 	return (-1);
+}
+
+void push_a_25_line(t_global *var, int *big)
+{
+    int index_max;
+                
+    if(var->down == 0 || var->stack_b->content > lstlast(var->stack_a)->content)
+    {
+        pa_push_a(&var->stack_a,&var->stack_b);
+        ra_rotate_a(&var->stack_a);
+        var->down++;
+    }
+    else
+    {
+        index_max = chrch_index_value(var->stack_b,var->tab[*big]);
+        if (index_max <= (ft_lstsize_p(var->stack_b)) / 2)
+            rb_rotate_b(&var->stack_b);
+        else
+            rrb_reve_rotat_b(&var->stack_b);
+    }
+                
 }
 
 void    pushb_to_a(t_global *var)
@@ -135,23 +153,7 @@ void    pushb_to_a(t_global *var)
                 big--;
             }
             else
-                {
-                    if(var->down == 0 || var->stack_b->content > lstlast(var->stack_a)->content)
-                    {
-                        pa_push_a(&var->stack_a,&var->stack_b);
-                        ra_rotate_a(&var->stack_a);
-                        var->down++;
-                    }
-                    else
-                    {
-                        int index_max = chrch_index_value(var->stack_b,var->tab[big]);
-                        if (index_max <= (ft_lstsize_p(var->stack_b)) / 2)
-                            rb_rotate_b(&var->stack_b);
-                        else
-                            rrb_reve_rotat_b(&var->stack_b);
-                    
-                    }
-                }
+                push_a_25_line(var, &big);
         }
         else
         {
@@ -161,4 +163,3 @@ void    pushb_to_a(t_global *var)
         }
     }
 }
-

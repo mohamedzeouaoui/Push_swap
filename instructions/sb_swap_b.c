@@ -24,7 +24,7 @@ void    sb_swap_b(t_stack **b_list)
     elm = (*b_list)->next;
     tmp->next = elm;
     (*b_list)->next = tmp;
-    ft_putstr_fd("ra\n", 1);
+    ft_putstr_fd("sb\n", 1);
 
     return ;
 }

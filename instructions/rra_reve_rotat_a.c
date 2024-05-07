@@ -28,7 +28,7 @@ void    rra_reve_rotat_a(t_stack **a_list)
     elm->next = NULL;
     tmp->next = (*a_list);
     (*a_list) = tmp; 
-    ft_putstr_fd("ra\n", 1);
+    ft_putstr_fd("rra\n", 1);
 
     return ;
 }
