@@ -163,3 +163,8 @@ void    pushb_to_a(t_global *var)
         }
     }
 }
+
+void    algo_3number()
+{
+    
+}

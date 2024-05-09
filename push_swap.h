@@ -63,9 +63,8 @@ void    atoi_number(t_global *var,char **spltstr);
 void    fill_index(t_global *var);
 int parsing_global(int argc, char **argv,t_global *var,char ***spltstr);
 void fill_stack(t_global *var);
-
 void    pushb_to_a(t_global *var);
-
+int cheack_sorted(t_global *var);
 
 
 #endif

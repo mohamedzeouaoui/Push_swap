@@ -293,3 +293,18 @@ int parsing_global(int argc, char **argv,t_global *var,char ***spltstr)
     return(0);
 }
 
+int cheack_sorted(t_global *var)
+{
+    t_stack *a_head;
+
+    a_head = var->stack_a;
+
+    while (a_head->next)
+    {
+        if (a_head->content > a_head->next->content)
+            return(0);
+        
+        a_head = a_head->next;
+    }
+    return(1); 
+}

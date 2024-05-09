@@ -30,8 +30,9 @@ int main(int argc, char **argv)
     if (i == 1)
         return(1);
     fill_stack(&var);
+    if (cheack_sorted(&var))
+        return(0);
     push_to_b(&var);
-
     pushb_to_a(&var);
 
 
@@ -48,6 +49,7 @@ int main(int argc, char **argv)
         tmp = tmp->next;
     }
 
+    
  
     ft_dbl_free(spltstr);
     exit_program(var.stack_a, var.stack_b, 0);
