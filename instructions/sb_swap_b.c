@@ -12,7 +12,7 @@
 
 #include  "../push_swap.h"
 
-void    sb_swap_b(t_stack **b_list)
+void    sb_swap_b(t_stack **b_list, int flag)
 {
     t_stack *tmp;
     t_stack *elm;
@@ -24,7 +24,8 @@ void    sb_swap_b(t_stack **b_list)
     elm = (*b_list)->next;
     tmp->next = elm;
     (*b_list)->next = tmp;
-    ft_putstr_fd("sb\n", 1);
+    if(flag == 1)
+        ft_putstr_fd("sb\n", 1);
 
     return ;
 }

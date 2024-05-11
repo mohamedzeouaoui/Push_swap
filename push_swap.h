@@ -13,6 +13,8 @@
 #ifndef PUSH_SWAP_H
 # define PUSH_SWAP_H
 # include "libft/libft.h"
+#include "get_next_line.h"
+
 
 typedef struct s_stack
 {
@@ -43,20 +45,20 @@ void	lstadd_back(t_stack **lst, t_stack *new);
 int	ft_lstsize_p(t_stack *lst);
 t_stack	*lstlast(t_stack *lst);
 t_stack	*lstnew(int content);
-void    pa_push_a(t_stack **a_list, t_stack **b_list);
-void    pb_push_b(t_stack **a_list, t_stack **b_list);
-void    ra_rotate_a(t_stack **a_list);
-void    rb_rotate_b(t_stack **b_list);
-void    rr_ra_rb(t_stack **a_list,t_stack **b_list);
-void    rra_reve_rotat_a(t_stack **a_list);
-void    rrb_reve_rotat_b(t_stack **b_list);
-void    rrr_rra_rrb(t_stack **a_list,t_stack **b_list);
-void    sa_swap_a(t_stack **a_list);
-void    sb_swap_b(t_stack **b_list);
-void    ss_sa_b(t_stack **a_list, t_stack **b_list);
+void    pa_push_a(t_stack **a_list, t_stack **b_list, int flag);
+void    pb_push_b(t_stack **a_list, t_stack **b_list, int flag);
+void    ra_rotate_a(t_stack **a_list, int flag);
+void    rb_rotate_b(t_stack **b_list, int flag);
+void    rr_ra_rb(t_stack **a_list,t_stack **b_list, int flag);
+void    rra_reve_rotat_a(t_stack **a_list, int flag);
+void    rrb_reve_rotat_b(t_stack **b_list, int flag);
+void    rrr_rra_rrb(t_stack **a_list,t_stack **b_list, int flag);
+void    sa_swap_a(t_stack **a_list, int flag);
+void    sb_swap_b(t_stack **b_list, int flag);
+void    ss_sa_b(t_stack **a_list, t_stack **b_list, int flag);
 void    push_to_b(t_global *var);
 void    ft_dbl_free(char **dbl_ptr);
-void    exit_program(t_stack *a_head, t_stack *b_head, int exit_flag);
+void    exit_program(int exit_flag);
 int cheack_duplicate(int *tab,int len);
 void parsing (int argc, char **argv , char    ***spltstr, t_global *var);
 void    atoi_number(t_global *var,char **spltstr);
@@ -65,6 +67,10 @@ int parsing_global(int argc, char **argv,t_global *var,char ***spltstr);
 void fill_stack(t_global *var);
 void    pushb_to_a(t_global *var);
 int cheack_sorted(t_global *var);
+void    algo_less_than5(t_global *var);
+void    garbage_collector(void);
+void    *safe_alloc(size_t size);
+t_global    get_var();
 
 
 #endif

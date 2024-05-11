@@ -1,4 +1,5 @@
 NAME := push_swap
+BONUS = checker
 
 SRC := pa_push_a.c rb_rotate_b.c rrb_reve_rotat_b.c \
 			rrr_rra_rrb.c sb_swap_b.c pb_push_b.c ra_rotate_a.c \
@@ -6,9 +7,14 @@ SRC := pa_push_a.c rb_rotate_b.c rrb_reve_rotat_b.c \
 
 CFILES := ${addprefix instructions/, ${SRC}} push_swap.c function_utils.c \
 			ft_atoi_push.c ft_lstadd_back.c ft_lstlast.c ft_lstnew.c \
-			 algo.c ft_lstsize.c\
+			algo.c ft_lstsize.c garbage_collector.c \
+
+CFILESB := ${addprefix instructions/, ${SRC}} checker.c get_next_line.c function_utils.c \
+			ft_atoi_push.c ft_lstadd_back.c ft_lstlast.c ft_lstnew.c \
+			algo.c ft_lstsize.c garbage_collector.c get_next_line_utils.c\
 
 OBJS := ${CFILES:.c=.o}
+OBJSB = ${CFILESB: .c=.o}
 
 LIB := libft/libft.a
 
@@ -18,12 +24,16 @@ RM := rm -rf
 
 
 all: ${NAME}
+bonus: ${BONUS}
 
 ${NAME}: ${OBJS} ${LIB}
 	${CC} ${CFLAGS} ${OBJS} ${LIB} -o ${NAME}
 
+${BONUS}: ${OBJSB} ${LIB}
+	${CC} ${CFLAGS} ${OBJSB} ${LIB} -o ${BONUS}
+
 ${LIB}:
-	@${MAKE} -C libft/ re --quiet
+	@${MAKE} -C libft/ bonus --quiet
 
 clean:
 	${RM} ${OBJS}

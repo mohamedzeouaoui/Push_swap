@@ -38,7 +38,7 @@ int	ft_atoi_push(const char *str)
 	}
 	nmb = nmb * m;
 	if (nmb < INT_MIN || nmb > INT_MAX)
-		return (ft_putstr_fd("Error\n", 2), exit(1), 0);
+		return (ft_putstr_fd("Error\n", 2), exit_program(1), 0);
 	return (nmb);
 }
 

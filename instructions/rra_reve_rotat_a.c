@@ -12,7 +12,7 @@
 
 #include  "../push_swap.h"
 
-void    rra_reve_rotat_a(t_stack **a_list)
+void    rra_reve_rotat_a(t_stack **a_list, int flag)
 {
     t_stack *tmp;
     t_stack *elm;
@@ -27,8 +27,9 @@ void    rra_reve_rotat_a(t_stack **a_list)
     tmp = elm->next;
     elm->next = NULL;
     tmp->next = (*a_list);
-    (*a_list) = tmp; 
-    ft_putstr_fd("rra\n", 1);
+    (*a_list) = tmp;
+    if(flag == 1) 
+        ft_putstr_fd("rra\n", 1);
 
     return ;
 }

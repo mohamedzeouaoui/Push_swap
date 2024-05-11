@@ -14,121 +14,58 @@
 #include <stdio.h>
 #include <stdlib.h>
 
+t_global    get_var()
+{
+    static t_global var;
 
+    return (var);
+}
 
 int main(int argc, char **argv)
 {
     int i;
     char    **spltstr;
-    t_stack *tmp;
+    // t_stack *tmp;
     t_global var;
 
+    var = get_var();
     spltstr = NULL;
     var.stack_a = NULL;
     var.stack_b = NULL;
+    if (argc < 2)
+        return(0);
     i = parsing_global(argc, argv, &var,&spltstr);
     if (i == 1)
-        return(1);
+        exit_program(1);
     fill_stack(&var);
     if (cheack_sorted(&var))
-        return(0);
+        exit_program(0);
+    if(var.size < 6)
+        algo_less_than5(&var);
     push_to_b(&var);
     pushb_to_a(&var);
 
+    // tmp = var.stack_b;
+    // while (tmp)
+    // {
+    //     printf("%d\n", tmp->content);
+    //     tmp = tmp->next;
+    // }
+    // tmp = var.stack_a;
+    // while (tmp)
+    // {
+    //     printf("........%d\n", tmp->content);
+    //     tmp = tmp->next;
+    // }
 
-    tmp = var.stack_b;
-    while (tmp)
-    {
-        printf("%d\n", tmp->content);
-        tmp = tmp->next;
-    }
-    tmp = var.stack_a;
-    while (tmp)
-    {
-        printf("........%d\n", tmp->content);
-        tmp = tmp->next;
-    }
 
-    
- 
-    ft_dbl_free(spltstr);
-    exit_program(var.stack_a, var.stack_b, 0);
+
+    exit_program(0);
     return 0;
-
 }
 
 
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-// void    checkspace(int argc, char **argv)
-// {
-//     int i;
-//     intvar.size;
-//     int n;
     
-    
-//     j = 0;
-//     i = 1;
-//     while (i < argc)
-//     {
-//         n = 0;
-//         while (argv[i][j])
-//         {
-
-//             if (argv[i][j] == ' ')
-//                 n++;
-//             j++;
-//         }
-  
-//         if (n != 0)
-//         {
-//             printf("error");
-//         }
-   
-//       i++;
-//     }
-    
-//     // printf("%i", argc);
-// }

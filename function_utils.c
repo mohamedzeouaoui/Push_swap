@@ -11,7 +11,7 @@
 /* ************************************************************************** */
 
 #include "push_swap.h"
-
+#include <stdio.h>
 
 int cheack_duplicate(int *tab,int len)
 {
@@ -36,28 +36,32 @@ int cheack_duplicate(int *tab,int len)
     return (0);
 }
 
-void    exit_program(t_stack *a_head, t_stack *b_head, int exit_flag)
+void    exit_program(int exit_flag)
 {
+    t_global    var;
     t_stack *temp;
 
-    if (a_head != NULL)
+    var = get_var();
+    if (var.stack_a != NULL)
     {
-        while (a_head)
+        while (var.stack_a)
         {
-            temp = a_head;
-            a_head = a_head->next;
+            temp = var.stack_a;
+            var.stack_a = var.stack_a->next;
             free(temp);
         }
     }
-    if (b_head != NULL)
+    if (var.stack_b != NULL)
     {
-        while (b_head)
+        while (var.stack_b)
         {
-            temp = b_head;
-            b_head = b_head->next;
+            temp = var.stack_b;
+            var.stack_b = var.stack_b->next;
             free(temp);
         }
     }
+    free(var.tab);
+    garbage_collector();
     exit(exit_flag);
 }
 
@@ -97,6 +101,7 @@ int    ft_check_fullspace(int argc,char **argv)
             return(1);
         }
     }
+
     return(0);
 }
 
@@ -136,7 +141,6 @@ int ft_check_full_number(int j, char **splstre)
     i = 0;
     while (i < j)
     {
-
         if (ft_check_number(splstre[i]) == 0)
         {
             ft_putstr_fd("Error\n", 2);
@@ -209,7 +213,10 @@ void    count_size(t_global *var, char **spltstr)
     while (spltstr[var->size])
         var->size++;
     if (var->size == 1)
-        exit(1); //you should free here
+    {
+        ft_dbl_free(spltstr);
+        exit_program(0);
+    }
 }
 void    parsing (int argc, char **argv , char ***spltstr, t_global *var)
 {
@@ -218,6 +225,7 @@ void    parsing (int argc, char **argv , char ***spltstr, t_global *var)
     char    *temporary;
 
     i = 1;
+    (void)var;
     joinstr = malloc(1);
     joinstr[0] = '\0';
     while (i < argc)
@@ -232,19 +240,17 @@ void    parsing (int argc, char **argv , char ***spltstr, t_global *var)
     }
     *spltstr = ft_split(joinstr, ' ');
     free(joinstr);
-    count_size(var, *spltstr);
     return ;
 }
 
 void    atoi_number(t_global *var,char **spltstr)
 {
     int j;
-    var->tab = malloc(sizeof(int) * var->size);
+    var->tab = safe_alloc(sizeof(int) * var->size);
     j = 0;
     while (spltstr[j])
     {
         var->tab[j] = ft_atoi_push(spltstr[j]);
-        // printf("1>");
         j++;
     }
 }
@@ -285,11 +291,16 @@ int parsing_global(int argc, char **argv,t_global *var,char ***spltstr)
     if (ft_check_fullspace(argc,argv))
         return(1);
     parsing(argc, argv, spltstr,var);
+    var->size = 0;
+    while ((*spltstr)[var->size])
+        var->size++;
     if(ft_check_full_number(var->size, *spltstr))
         return(1);
+    count_size(var, *spltstr);
     atoi_number(var, *spltstr);
     if(cheack_duplicate(var->tab, var->size))
         return(1);
+    ft_dbl_free(*spltstr);
     return(0);
 }
 

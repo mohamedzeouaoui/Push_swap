@@ -12,11 +12,20 @@
 
 #include  "../push_swap.h"
 
-void    ss_sa_b(t_stack **a_list, t_stack **b_list)
+void    ss_sa_b(t_stack **a_list, t_stack **b_list, int flag)
 {
-    sa_swap_a(a_list);
-    sb_swap_b(b_list);
-    ft_putstr_fd("ss\n", 1);
+    if (flag == 1)
+    {
+        sa_swap_a(a_list, 1);
+        sb_swap_b(b_list, 1);
+        ft_putstr_fd("ss\n", 1);
+    }
+    else
+    {
+        sa_swap_a(a_list, 0);
+        sb_swap_b(b_list, 0);
+    }
+    
     
 }
 

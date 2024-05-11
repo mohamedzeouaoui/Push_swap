@@ -1,0 +1,31 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   get_next_line.h                                    :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mzeouaou <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/12/21 15:05:53 by mzeouaou          #+#    #+#             */
+/*   Updated: 2023/12/21 15:05:57 by mzeouaou         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#ifndef GET_NEXT_LINE_H
+# define GET_NEXT_LINE_H
+
+# include <fcntl.h>
+# include <stdio.h>
+# include <stdlib.h>
+# include <unistd.h>
+
+# ifndef BUFFER_SIZE
+#  define BUFFER_SIZE 1
+# endif
+
+char	*gnl_strjoin(char *s1, char *s2);
+char	*get_next_line(int fd);
+char	*gnl_substr(char *s, unsigned int start, size_t len);
+size_t	gnl_strlen(const char *str);
+char	*gnl_strchr(char *s, int c);
+
+#endif

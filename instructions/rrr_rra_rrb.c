@@ -12,10 +12,18 @@
 
 #include  "../push_swap.h"
 
-void    rrr_rra_rrb(t_stack **a_list,t_stack **b_list)
+void    rrr_rra_rrb(t_stack **a_list,t_stack **b_list, int flag)
 {
-    rra_reve_rotat_a(a_list);
-    rrb_reve_rotat_b(b_list);
-    ft_putstr_fd("rrr\n", 1);
+    if (flag == 1)
+    {
+        rra_reve_rotat_a(a_list, 1);
+        rrb_reve_rotat_b(b_list, 1);
+        ft_putstr_fd("rrr\n", 1);
+    }
+    else
+    {
+        rra_reve_rotat_a(a_list, 0);
+        rrb_reve_rotat_b(b_list, 0);
+    }    
 
 }

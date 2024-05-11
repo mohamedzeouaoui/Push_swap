@@ -26,7 +26,7 @@ all: ${NAME}
 ${NAME}: ${OBJS}
 	${AR} ${NAME} ${OBJS}
 
-${OBJSB}: ${CFILESB}
+${OBJSB}: ${NAME}
 	${CC} ${CFLAGS} -c ${CFILESB}
 	${AR} ${NAME} ${OBJSB}
 
@@ -41,3 +41,4 @@ fclean: clean
 re: fclean all
 
 .PHONY: all bonus clean fclean re
+.SECONDARY: ${OBJS}
