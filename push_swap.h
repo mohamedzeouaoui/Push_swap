@@ -28,6 +28,7 @@ typedef struct global
 	int				offset;
 	int				size;
 	int				down;
+	int				middle;
 	int				size_a;
 	int				size_b;
 	t_stack			*stack_a;

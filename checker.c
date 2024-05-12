@@ -34,7 +34,7 @@ int	main(int argc, char **argv)
 		return (0);
 	i = parsing_global(argc, argv, &var, &spltstr);
 	if (i == 1)
-		return (ft_dbl_free(spltstr), exit_program(1), 1);
+		return (exit_program(1), 1);
 	fill_stack(&var);
 	instra = read_instructions();
 	i = 0;

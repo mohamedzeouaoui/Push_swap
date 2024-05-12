@@ -94,6 +94,8 @@ void	ft_dbl_free(char **dbl_ptr)
 	int	i;
 
 	i = 0;
+	if (dbl_ptr == NULL)
+		return ;
 	while (dbl_ptr[i])
 		free(dbl_ptr[i++]);
 	free(dbl_ptr);

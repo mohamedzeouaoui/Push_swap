@@ -13,7 +13,7 @@
 #include "push_swap.h"
 #include <stdio.h>
 
-void	push_algo(t_global *var, int start, int end, int offset, int middle)
+void	push_algo(t_global *var, int start, int end, int offset)
 {
 	int	i;
 
@@ -25,7 +25,7 @@ void	push_algo(t_global *var, int start, int end, int offset, int middle)
 			if (chrch_in(var->stack_a->content, var->tab, start, end))
 			{
 				pb_push_b(&var->stack_a, &var->stack_b, 1);
-				if (var->stack_b->content < var->tab[middle])
+				if (var->stack_b->content < var->tab[var->middle])
 					rb_rotate_b(&var->stack_b, 1);
 			}
 			else
@@ -45,17 +45,16 @@ void	push_algo(t_global *var, int start, int end, int offset, int middle)
 void	push_to_b(t_global *var)
 {
 	int	n;
-	int	middle;
 	int	offset;
 	int	start;
 	int	end;
 
 	n = check_n(var->size);
-	middle = var->size / 2;
+	var->middle = var->size / 2;
 	offset = var->size / n;
-	start = middle - offset;
-	end = middle + offset;
-	push_algo(var, start, end, offset, middle);
+	start = var->middle - offset;
+	end = var->middle + offset;
+	push_algo(var, start, end, offset);
 }
 
 void	push_a_25_line(t_global *var, int *big)

@@ -52,12 +52,12 @@ int	main(int argc, char **argv)
 // tmp = var.stack_b;
 // while (tmp)
 // {
-//     printf("%d\n", tmp->content);
-//     tmp = tmp->next;
+// 	printf("%d\n", tmp->content);
+// 	tmp = tmp->next;
 // }
 // tmp = var.stack_a;
 // while (tmp)
 // {
-//     printf("........%d\n", tmp->content);
-//     tmp = tmp->next;
+// 	printf("........%d\n", tmp->content);
+// 	tmp = tmp->next;
 // }
