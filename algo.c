@@ -114,6 +114,8 @@ int	ft_check_number(char *str)
 	i = 0;
 	if (str[0] == '-' || str[0] == '+')
 		i++;
+	if (str[i] == '\0')
+		return (0);
 	while (str[i])
 	{
 		if (ft_isdigit_sp(str[i]) == 0)

@@ -94,8 +94,8 @@ int	parsing_global(int argc, char **argv, t_global *var, char ***spltstr)
 		var->size++;
 	if (ft_check_full_number(var->size, *spltstr))
 		return (1);
-	count_size(var, *spltstr);
 	atoi_number(var, *spltstr);
+	count_size(var, *spltstr);
 	if (cheack_duplicate(var->tab, var->size))
 		return (1);
 	ft_dbl_free(*spltstr);

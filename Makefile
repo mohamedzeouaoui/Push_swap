@@ -16,7 +16,7 @@ CFILESB = ${addprefix instructions/, ${SRC}} checker.c get_next_line.c function_
 			function_utils_1.c function_utils_2.c function_main_bonus.c \
 
 OBJS = ${CFILES:.c=.o}
-OBJSB = ${CFILESB: .c=.o}
+OBJSB = ${CFILESB:.c=.o}
 
 LIB = libft/libft.a
 
@@ -38,11 +38,11 @@ ${LIB}:
 	@${MAKE} -C libft/ bonus --quiet
 
 clean:
-	${RM} ${OBJS}
+	${RM} ${OBJS} ${OBJSB}
 	@make -C libft/ clean --quiet
 
 fclean: clean
-	${RM} ${NAME} ${LIB}
+	${RM} ${NAME} ${LIB} ${BONUS}
 
 re: fclean all
 
