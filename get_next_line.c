@@ -10,10 +10,8 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-
 #include "get_next_line.h"
 #include "push_swap.h"
-
 
 char	*redlang_line(char *str, int fd, char *buffer)
 {

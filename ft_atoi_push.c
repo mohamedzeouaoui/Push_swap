@@ -16,7 +16,7 @@
 
 int	ft_atoi_push(const char *str)
 {
-	int	m;
+	int		m;
 	long	nmb;
 
 	m = 1;
@@ -41,4 +41,3 @@ int	ft_atoi_push(const char *str)
 		return (ft_putstr_fd("Error\n", 2), exit_program(1), 0);
 	return (nmb);
 }
-

@@ -10,20 +10,19 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include  "../push_swap.h"
+#include "../push_swap.h"
 
-void    pb_push_b(t_stack **a_list, t_stack **b_list, int flag)
+void	pb_push_b(t_stack **a_list, t_stack **b_list, int flag)
 {
-    t_stack *tmp;
+	t_stack	*tmp;
 
-    if (*a_list == NULL)
-        return ;
-    tmp = *a_list;
-    *a_list = (*a_list)->next;
-    tmp->next = *b_list;
-    *b_list = tmp;
-    if(flag == 1)
-        ft_putstr_fd("pb\n", 1);
-
-    return ;
+	if (*a_list == NULL)
+		return ;
+	tmp = *a_list;
+	*a_list = (*a_list)->next;
+	tmp->next = *b_list;
+	*b_list = tmp;
+	if (flag == 1)
+		ft_putstr_fd("pb\n", 1);
+	return ;
 }

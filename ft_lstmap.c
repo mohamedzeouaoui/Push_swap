@@ -35,7 +35,7 @@ t_stack	*ft_lstmap(t_list *lst, void *(*f)(void *), void (*del)(void *))
 }
 
 // int	main(void)
-// {	
+// {
 //     int arr[3] = {1,2,3};
 // 	// Create a linked list with some integer values
 // 	t_list *lst = ft_lstnew(&arr[0]);

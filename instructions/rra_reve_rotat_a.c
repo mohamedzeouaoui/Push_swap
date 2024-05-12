@@ -10,26 +10,25 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include  "../push_swap.h"
+#include "../push_swap.h"
 
-void    rra_reve_rotat_a(t_stack **a_list, int flag)
+void	rra_reve_rotat_a(t_stack **a_list, int flag)
 {
-    t_stack *tmp;
-    t_stack *elm;
+	t_stack	*tmp;
+	t_stack	*elm;
 
-    if (*a_list == NULL || ft_lstsize_p(*a_list) == 1)
-        return ;
-    elm = *a_list;
-    while (elm->next->next != NULL)
-    {
-        elm = elm->next;
-    }
-    tmp = elm->next;
-    elm->next = NULL;
-    tmp->next = (*a_list);
-    (*a_list) = tmp;
-    if(flag == 1) 
-        ft_putstr_fd("rra\n", 1);
-
-    return ;
+	if (*a_list == NULL || ft_lstsize_p(*a_list) == 1)
+		return ;
+	elm = *a_list;
+	while (elm->next->next != NULL)
+	{
+		elm = elm->next;
+	}
+	tmp = elm->next;
+	elm->next = NULL;
+	tmp->next = (*a_list);
+	(*a_list) = tmp;
+	if (flag == 1)
+		ft_putstr_fd("rra\n", 1);
+	return ;
 }

@@ -1,34 +1,47 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   garbage_collector.c                                :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mzeouaou <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/05/12 14:05:42 by mzeouaou          #+#    #+#             */
+/*   Updated: 2024/05/12 14:05:45 by mzeouaou         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "push_swap.h"
 
-t_list    **return_head(void)
+t_list	**return_head(void)
 {
-    static t_list    *garbage;
+	static t_list	*garbage;
 
-    return (&garbage);
+	return (&garbage);
 }
 
-void    *safe_alloc(size_t size)
+void	*safe_alloc(size_t size)
 {
-    void    *ptr;
+	void	*ptr;
 
-    ptr = malloc(size);
-    if (ptr == NULL)
-        return (NULL);
-    ft_lstadd_back(return_head(), ft_lstnew(ptr));
-    return (ptr);
+	ptr = malloc(size);
+	if (ptr == NULL)
+		return (NULL);
+	ft_lstadd_back(return_head(), ft_lstnew(ptr));
+	return (ptr);
 }
 
-void    garbage_collector(void)
+void	garbage_collector(void)
 {
-    t_list    *temp;
-    t_list    *garbage;
+	t_list	*temp;
+	t_list	*garbage;
 
-    garbage = *(return_head());
-    while (garbage)
-    {
-        temp = garbage;
-        garbage = garbage->next;
-        free(temp->content);
-        free(temp);
-    }
+	garbage = *(return_head());
+	while (garbage)
+	{
+		temp = garbage;
+		garbage = garbage->next;
+		free(temp->content);
+		free(temp);
+	}
+	garbage = NULL;
 }

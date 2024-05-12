@@ -13,309 +13,92 @@
 #include "push_swap.h"
 #include <stdio.h>
 
-int cheack_duplicate(int *tab,int len)
+void	count_size(t_global *var, char **spltstr)
 {
-    int i;
-    int j;
-
-    i = 0;
-    while (i < len)
-    {
-        j = 1;
-        while (j+i < len)
-        {
-            if (tab[i] == tab[j+i])
-            {
-                ft_putstr_fd("Error\n", 2);
-                return (1);
-            }
-            j++;
-        }
-        i++;
-    }
-    return (0);
-}
-
-void    exit_program(int exit_flag)
-{
-    t_global    var;
-    t_stack *temp;
-
-    var = get_var();
-    if (var.stack_a != NULL)
-    {
-        while (var.stack_a)
-        {
-            temp = var.stack_a;
-            var.stack_a = var.stack_a->next;
-            free(temp);
-        }
-    }
-    if (var.stack_b != NULL)
-    {
-        while (var.stack_b)
-        {
-            temp = var.stack_b;
-            var.stack_b = var.stack_b->next;
-            free(temp);
-        }
-    }
-    free(var.tab);
-    garbage_collector();
-    exit(exit_flag);
-}
-
-void    ft_dbl_free(char **dbl_ptr)
-{
-    int i;
-
-    i = 0;
-    while (dbl_ptr[i])
-        free(dbl_ptr[i++]);
-    free(dbl_ptr);
-}
-
-int    ft_check_space(char *arv)
-{
-    int i;
-
-    i = 0;
-    while (arv[i])
-    {
-        if (arv[i++]!= ' ')
-            return (1);
-    }
-    return(0);
-}
-
-int    ft_check_fullspace(int argc,char **argv)
-{
-    int i;
-
-    i = 1;
-    while (i < argc)
-    {
-        if (ft_check_space(argv[i++]) == 0)
-        {
-            ft_putstr_fd("Error\n", 2);
-            return(1);
-        }
-    }
-
-    return(0);
-}
-
-int	ft_isdigit_sp(int c)
-{
-	if ((c >= '0' && c <= '9') || c <= ' ')
+	var->size = 0;
+	while (spltstr[var->size])
+		var->size++;
+	if (var->size == 1)
 	{
+		ft_dbl_free(spltstr);
+		exit_program(0);
+	}
+}
+
+void	parsing(int argc, char **argv, char ***spltstr, t_global *var)
+{
+	int		i;
+	char	*joinstr;
+	char	*temporary;
+
+	i = 1;
+	(void)var;
+	joinstr = malloc(1);
+	joinstr[0] = '\0';
+	while (i < argc)
+	{
+		temporary = joinstr;
+		joinstr = ft_strjoin(joinstr, argv[i]);
+		free(temporary);
+		temporary = joinstr;
+		joinstr = ft_strjoin(joinstr, " ");
+		free(temporary);
+		i++;
+	}
+	*spltstr = ft_split(joinstr, ' ');
+	free(joinstr);
+	return ;
+}
+
+void	atoi_number(t_global *var, char **spltstr)
+{
+	int	j;
+
+	var->tab = safe_alloc(sizeof(int) * var->size);
+	j = 0;
+	while (spltstr[j])
+	{
+		var->tab[j] = ft_atoi_push(spltstr[j]);
+		j++;
+	}
+}
+
+void	fill_index(t_global *var)
+{
+	int		i;
+	int		m;
+	t_stack	*tmp;
+
+	i = 0;
+	tmp = var->stack_a;
+	while (i < var->size)
+	{
+		m = 0;
+		while (m < var->size)
+		{
+			if (tmp->content == var->tab[m])
+				tmp->index = m;
+			m++;
+		}
+		tmp = tmp->next;
+		i++;
+	}
+}
+
+int	parsing_global(int argc, char **argv, t_global *var, char ***spltstr)
+{
+	if (ft_check_fullspace(argc, argv))
 		return (1);
-	}
-	else
-	{
-		return (0);
-	}
-}
-
-int ft_check_number(char *str)
-{
-    int i;
-
-    i = 0;
-    if (str[0] == '-' || str [0] == '+')
-        i++;
-    while (str[i])
-    {
-        if (ft_isdigit_sp(str[i]) == 0)
-            return (0);
-        i++;
-    }
-    return(1);
-
-}
-
-int ft_check_full_number(int j, char **splstre)
-{
-    int i;
-    
-    i = 0;
-    while (i < j)
-    {
-        if (ft_check_number(splstre[i]) == 0)
-        {
-            ft_putstr_fd("Error\n", 2);
-            return (1);
-        }
-        i++;
-    }
-    return(0);
-}
-
-void    ft_swaping(int *a, int *b)
-{
-    int tmp;
-
-    tmp = *a;
-    *a = *b;
-    *b = tmp;
-}
-
-int *bubble_sort(int *tab, int len)
-{
-    int i;
-    int j;
-    int swap;
-
-    swap = 1;
-    i = 0;
-    while (swap)
-    {
-        swap = 0;
-        j = 0;
-        while (j < len - i - 1)
-        {
-            if (tab[j] > tab[j+1])
-            {
-                ft_swaping(&tab[j], &tab[j + 1]);
-                swap = 1;
-            }
-            j++;
-        }
-        i++;
-    }
-    return (tab);
-}
-
-void    get_index_list(t_stack **a_head_ptr, int *tab, int len)
-{
-    int i;
-    t_stack *temp;
-
-    temp = *a_head_ptr;
-    while (temp != NULL)
-    {
-        i = 0;
-        while (i < len)
-        {
-            if (temp->content == tab[i])
-            {
-                temp->index = i ;
-            }
-            i++;
-        }
-        temp = temp->next;
-    }
-    free(tab);
-}
-void    count_size(t_global *var, char **spltstr)
-{
-    var->size = 0;
-    while (spltstr[var->size])
-        var->size++;
-    if (var->size == 1)
-    {
-        ft_dbl_free(spltstr);
-        exit_program(0);
-    }
-}
-void    parsing (int argc, char **argv , char ***spltstr, t_global *var)
-{
-    int i;
-    char    *joinstr;
-    char    *temporary;
-
-    i = 1;
-    (void)var;
-    joinstr = malloc(1);
-    joinstr[0] = '\0';
-    while (i < argc)
-    {
-        temporary = joinstr;
-        joinstr = ft_strjoin(joinstr, argv[i]);
-        free(temporary);
-        temporary = joinstr;
-        joinstr = ft_strjoin(joinstr, " ");
-        free(temporary);
-        i++;
-    }
-    *spltstr = ft_split(joinstr, ' ');
-    free(joinstr);
-    return ;
-}
-
-void    atoi_number(t_global *var,char **spltstr)
-{
-    int j;
-    var->tab = safe_alloc(sizeof(int) * var->size);
-    j = 0;
-    while (spltstr[j])
-    {
-        var->tab[j] = ft_atoi_push(spltstr[j]);
-        j++;
-    }
-}
-void    fill_index(t_global *var)
-{
-    int i;
-    int m;
-    t_stack *tmp;
-
-    i = 0;
-    tmp = var->stack_a;
-     while (i < var->size)
-    {
-        m = 0;
-        while (m < var->size)
-        {
-            if(tmp->content == var->tab[m])
-                tmp->index = m;
-            m++;
-        }
-        tmp = tmp->next;
-        i++;
-    }
-}
-void fill_stack(t_global *var) 
-{
-    int i;
-
-    i = -1;
-    while (++i < var->size)
-        lstadd_back(&(var->stack_a),lstnew(var->tab[i]));
-    var->tab = bubble_sort(var->tab,var->size);
-    fill_index(var);
-}
-
-int parsing_global(int argc, char **argv,t_global *var,char ***spltstr)
-{
-    if (ft_check_fullspace(argc,argv))
-        return(1);
-    parsing(argc, argv, spltstr,var);
-    var->size = 0;
-    while ((*spltstr)[var->size])
-        var->size++;
-    if(ft_check_full_number(var->size, *spltstr))
-        return(1);
-    count_size(var, *spltstr);
-    atoi_number(var, *spltstr);
-    if(cheack_duplicate(var->tab, var->size))
-        return(1);
-    ft_dbl_free(*spltstr);
-    return(0);
-}
-
-int cheack_sorted(t_global *var)
-{
-    t_stack *a_head;
-
-    a_head = var->stack_a;
-
-    while (a_head->next)
-    {
-        if (a_head->content > a_head->next->content)
-            return(0);
-        
-        a_head = a_head->next;
-    }
-    return(1); 
+	parsing(argc, argv, spltstr, var);
+	var->size = 0;
+	while ((*spltstr)[var->size])
+		var->size++;
+	if (ft_check_full_number(var->size, *spltstr))
+		return (1);
+	count_size(var, *spltstr);
+	atoi_number(var, *spltstr);
+	if (cheack_duplicate(var->tab, var->size))
+		return (1);
+	ft_dbl_free(*spltstr);
+	return (0);
 }

@@ -12,65 +12,76 @@
 
 #ifndef PUSH_SWAP_H
 # define PUSH_SWAP_H
+# include "get_next_line.h"
 # include "libft/libft.h"
-#include "get_next_line.h"
-
 
 typedef struct s_stack
 {
-	int	content;
-	int	index;
+	int				content;
+	int				index;
 	struct s_stack	*next;
 }					t_stack;
 typedef struct global
 {
-	int start;
-	int end;
-	int offset;
-	int size;
-	int	down;
-	int size_a;
-	int size_b;
-	t_stack *stack_a;
-	t_stack *stack_b;
-	int *tab;
-} t_global;
+	int				start;
+	int				end;
+	int				offset;
+	int				size;
+	int				down;
+	int				size_a;
+	int				size_b;
+	t_stack			*stack_a;
+	t_stack			*stack_b;
+	int				*tab;
+}					t_global;
 
-void    get_index_list(t_stack **a_head_ptr, int *tab, int len);
-int	ft_atoi_push(const char *str);
-int    ft_check_fullspace(int argc,char **argv);
-int ft_check_full_number(int j, char **splstre);
-int *bubble_sort(int *tab, int len);
-void	lstadd_back(t_stack **lst, t_stack *new);
-int	ft_lstsize_p(t_stack *lst);
-t_stack	*lstlast(t_stack *lst);
-t_stack	*lstnew(int content);
-void    pa_push_a(t_stack **a_list, t_stack **b_list, int flag);
-void    pb_push_b(t_stack **a_list, t_stack **b_list, int flag);
-void    ra_rotate_a(t_stack **a_list, int flag);
-void    rb_rotate_b(t_stack **b_list, int flag);
-void    rr_ra_rb(t_stack **a_list,t_stack **b_list, int flag);
-void    rra_reve_rotat_a(t_stack **a_list, int flag);
-void    rrb_reve_rotat_b(t_stack **b_list, int flag);
-void    rrr_rra_rrb(t_stack **a_list,t_stack **b_list, int flag);
-void    sa_swap_a(t_stack **a_list, int flag);
-void    sb_swap_b(t_stack **b_list, int flag);
-void    ss_sa_b(t_stack **a_list, t_stack **b_list, int flag);
-void    push_to_b(t_global *var);
-void    ft_dbl_free(char **dbl_ptr);
-void    exit_program(int exit_flag);
-int cheack_duplicate(int *tab,int len);
-void parsing (int argc, char **argv , char    ***spltstr, t_global *var);
-void    atoi_number(t_global *var,char **spltstr);
-void    fill_index(t_global *var);
-int parsing_global(int argc, char **argv,t_global *var,char ***spltstr);
-void fill_stack(t_global *var);
-void    pushb_to_a(t_global *var);
-int cheack_sorted(t_global *var);
-void    algo_less_than5(t_global *var);
-void    garbage_collector(void);
-void    *safe_alloc(size_t size);
-t_global    get_var();
-
+int					check_n(int j);
+int					chrch_in(int value, int *tab, int start, int end);
+int					cheack_in_b(t_global *var, int value);
+int					chrch_index_value(t_stack *stack_b, int max);
+void				ft_swaping(int *a, int *b);
+int					ft_check_number(char *str);
+void				get_index_list(t_stack **a_head_ptr, int *tab, int len);
+int					ft_atoi_push(const char *str);
+int					ft_check_fullspace(int argc, char **argv);
+int					ft_check_full_number(int j, char **splstre);
+int					ft_isdigit_sp(int c);
+int					*bubble_sort(int *tab, int len);
+void				lstadd_back(t_stack **lst, t_stack *new);
+int					ft_lstsize_p(t_stack *lst);
+t_stack				*lstlast(t_stack *lst);
+t_stack				*lstnew(int content);
+void				pa_push_a(t_stack **a_list, t_stack **b_list, int flag);
+void				pb_push_b(t_stack **a_list, t_stack **b_list, int flag);
+void				ra_rotate_a(t_stack **a_list, int flag);
+void				rb_rotate_b(t_stack **b_list, int flag);
+void				rr_ra_rb(t_stack **a_list, t_stack **b_list, int flag);
+void				rra_reve_rotat_a(t_stack **a_list, int flag);
+void				rrb_reve_rotat_b(t_stack **b_list, int flag);
+void				rrr_rra_rrb(t_stack **a_list, t_stack **b_list, int flag);
+void				sa_swap_a(t_stack **a_list, int flag);
+void				sb_swap_b(t_stack **b_list, int flag);
+void				ss_sa_b(t_stack **a_list, t_stack **b_list, int flag);
+void				push_to_b(t_global *var);
+void				ft_dbl_free(char **dbl_ptr);
+void				exit_program(int exit_flag);
+int					cheack_duplicate(int *tab, int len);
+void				parsing(int argc, char **argv, char ***spltstr,
+						t_global *var);
+void				atoi_number(t_global *var, char **spltstr);
+void				fill_index(t_global *var);
+int					parsing_global(int argc, char **argv, t_global *var,
+						char ***spltstr);
+void				fill_stack(t_global *var);
+void				pushb_to_a(t_global *var);
+int					cheack_sorted(t_global *var);
+void				algo_less_than5(t_global *var);
+void				garbage_collector(void);
+void				*safe_alloc(size_t size);
+t_global			get_var(void);
+void				apply_instructions(char **instra, t_global *var, int i);
+char				**read_instructions(void);
+char				*join(char **ptr, char **line);
+int					check_stack_vide(t_global *var);
 
 #endif
